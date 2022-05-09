@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Are they similar?</title>
+  </head>
+  <body>
+    <h1>Show visually similar images </h1>
+
+    <div>
+      <form action="/" method="POST" enctype="multipart/form-data">
+        Choose Image: <input type="file" name="file" accept=".jpg,.png" ><br>
+        <input type="submit" name="submit" value="Submit">
+      </form>
+    </div>
+    
+
+{% if image_data is defined and image_data["original_image"] is defined  %}
+
+    <h2>Your image</h2>
+    <div class="responsive-single">
+      <div class="srcimg">
+        <img src="{{ image_data['original_image'] }}" alt="yourimage" width=200 height=200>
+      </div>
+    </div>  
+
+    <h2>Vision API results for visually similar images(upto 8 images)</h2>
+    <h4>Best guess labels</h4>
+    <div class="desc">
+      {% for label in image_data['best_guess_labels'] %}
+         <li>{{ label }}</li> 
+      {% endfor %}
+    </div>
+ 
+    <h4>Visually similar images</h4>
+    {% for url in image_data['similar_image_urls'] %}
+      <div class="responsive">
+        <div class="gallery">
+          <img src="{{ url }}" width=200 height=200 onerror="this.style.display='none'">
+        </div>
+      </div>
+    {% endfor %}
+
+{% else %}
+
+<div style="padding:6px;">
+  <p> This application allows to upload image file and find visually similar images to provided one.
+Additionally your image will be submitted for further analysis (label extraction). </p>
+  <p> Uploaded pictures will be used only for the "fun", later on will be deleted. </p>
+</div>
+
+{% endif %}
+  </body>
+</html> 
+
+
