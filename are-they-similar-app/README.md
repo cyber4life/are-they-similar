@@ -1,10 +1,7 @@
-# Are They Similar?
-Image analysis example application created by using GCP components and Vision AI.
-
-## Are They Similar? application description
+# Are They Similar? application description
 Application allows you to upload the image and then returns up to 8 visually similar images from internet.
 
-## Pre-reqs
+# Pre-reqs
 - Go to https://console.cloud.google.com/, select the project where app will be deployed
 -  Check if Cloud Vision API is enabled for your project.
     * Navigate to APIs & Services -> [Library](https://console.cloud.google.com/apis/library/browse)
@@ -21,7 +18,7 @@ echo $PROJECT_ID
 ```
 - Create Google cloud storage bucktet. Uploaded images will be stored there.
 ```shell
-export ATS_IMAGES_BUCKET = {PROJECT_ID}-aretheysimilar-images
+export ATS_IMAGES_BUCKET = ${PROJECT_ID}-aretheysimilar-images
 gsutil mb -l eu gs://$ATS_IMAGES_BUCKET
 ```
 Flag **-l** defines that bucket location is Europe.
@@ -36,8 +33,9 @@ GCS_BUCKET_NAME = "aretheysimilarapp-images"
         --role roles/storage.admin
 ```
 For lab purposes this approach is OK.
-## Deployment
+# Deployment
 App can be deployed to Google App Engine. Standard enviroment is used by default. navigate to where app.yaml is located (<i>are-they-similar-app</i>) and execute command below
 ```shell
 gcloud app deploy
 ```
+Deployed application is available https://[YOUR_PROJECT_ID].appspot.com
